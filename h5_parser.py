@@ -41,7 +41,7 @@ def parseFile(filename):
             totalBrightness += j
 
     # pretty output
-    print("\n~~~~~~ {} ~~~~~~\n".format(fname))
+    print("\n~~~~~~ {} ~~~~~~\n".format(filename))
     print("Total Brightness Temperature: {}".format(totalBrightness))
     toc = time.perf_counter()
     print("Time elapsed: {} seconds".format(int(toc - tic)))
