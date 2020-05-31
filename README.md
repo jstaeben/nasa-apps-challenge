@@ -21,4 +21,9 @@ Output:
   - Saves plot of Date vs. Brightness Temperature into the BrightTempImages directory  
 - If you select True for saving images and GIF:
   - Everything from the above section
-  - Images and GIF saved into the BrightTempImages directory  '
+  - Images and GIF saved into the `BrightTempImages/` directory
+  
+What you need:
+- HDF5 files in a `h5files/` directory (located in working directory)
+- List of HDF5 file names in `data_files.txt `
+  - Ideally these would be named after the Month/Day the data was collected (ex: Jan01.h5)
