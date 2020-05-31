@@ -169,5 +169,5 @@ plt.xticks(x_values, text_values)
 plotting_dir = "BrightTempImages/"
 if not os.path.exists(plotting_dir):
     os.mkdir(plotting_dir)
-plt.savefig(plotting_dir + 'Temp' '.png')
+plt.savefig(plotting_dir + 'BrightTempPlot.png')
 plt.close()
