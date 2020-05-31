@@ -15,6 +15,7 @@ Output:
         > Total Brightness Temperature for each data file
         > Time elapsed for that calculation
         > Full list of Dates and the corresponding Brightness Temperature
+        > Saves plot of Date vs. Brightness Temperature into the BrightTempImages directory  
     
     - If you select True for saving images and GIF:
         > Everything from False
@@ -44,7 +45,7 @@ def parseFile(filename, save_imgs):
     tic = time.perf_counter()
 
     # open h5 file
-    f1 = h5.File(filename, "r")
+    f1 = h5.File("h5files/" + filename, "r")
 
     # some weird h5 file stuff
     dset = f1['HDFEOS']
@@ -64,15 +65,17 @@ def parseFile(filename, save_imgs):
         for j in i:
             totalBrightness += j
 
-    
     # calculate the actual avg brightness
     actualAvgBrightness = int(totalBrightness/5760000)
     actualAvgBrightness *= 0.0025
+    actualAvgBrightness = round(actualAvgBrightness, 2)
 
     # pretty output
     print("\n~~~~~~ {} ~~~~~~\n".format(filename))
-    print("Total Brightness Temperature: {}".format(totalBrightness))
+#    print("Total Brightness Temperature: {}".format(totalBrightness))
     print("Average Brightness Temperature: {}".format(actualAvgBrightness))
+    
+    # end timer
     toc = time.perf_counter()
     print("Time elapsed: {} seconds".format(int(toc - tic)))
 
@@ -96,7 +99,7 @@ def parseFile(filename, save_imgs):
         # speed is the number of the same picture that is added to the gif
         # the higher the number, the slower the speed of the gif, and vice-versa
         # (because it will go through several of the same pic before switching to a new one)
-        speed = 1
+        speed = 2
         for x in range(speed):
             img_files.append(img_filename)
 
@@ -139,7 +142,7 @@ for key, val in brightness_dict.items():
     print(key + ": {}".format(val))
     # this can be used to also just pull the brightness values from the dict
 
-
+# plot Brightness Temperature Changes Over Time
 y_values = []
 for val in brightness_dict.values():
     y_values.append(val)
@@ -152,12 +155,12 @@ x_values = np.arange(1, len(text_values) + 1, 1)
 fig, ax = plt.subplots(figsize=(18,10))
 plt.ylabel('Brightness Temperature (K)',size=30)
 plt.ylabel('Date',size=30)
-plt.title('Brightness Temperature Changes over time',size=50)
+plt.title('Brightness Temperature Changes Over Time',size=50)
 fig.autofmt_xdate()
 plt.plot(x_values, y_values,"-")
 plt.xticks(x_values, text_values)
 
-
+# save the plot as a png
 plotting_dir = "BrightTempImages/"
 if not os.path.exists(plotting_dir):
     os.mkdir(plotting_dir)
