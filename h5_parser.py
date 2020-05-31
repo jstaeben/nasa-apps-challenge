@@ -27,6 +27,7 @@ import h5py as h5
 import matplotlib.pyplot as plt
 import imageio
 import numpy as np
+import datetime
 
 # open a file containing list of .h5 files
 data_files = open("data_files.txt", "r")
@@ -66,7 +67,6 @@ def parseFile(filename, save_imgs):
     # calculate the actual avg brightness
     actualAvgBrightness = int(totalBrightness/5760000)
     actualAvgBrightness *= 0.0025
-    actualAvgBrightness += 203 # MAKE SURE THIS VALUE IS RIGHT
 
     # pretty output
     print("\n~~~~~~ {} ~~~~~~\n".format(filename))
@@ -121,13 +121,16 @@ if sys.argv[1] == "True":
         images.append(imageio.imread(file))
     imageio.mimsave('BrightTempImages/GIF.gif', images)
 
-# end timer
-endtime = time.perf_counter()
-
 # pretty seperator
 print("\n~~~~~~ DONE, yay! ~~~~~~\n")
 
-print("Total time elapsed: {} seconds".format(int(endtime - starttime)))
+# end timer
+endtime = time.perf_counter()
+# convert time to h:m:s
+elapsedtime = int(endtime - starttime)
+hms = str(datetime.timedelta(seconds=elapsedtime))
+
+print("Total time elapsed: {}".format(hms))
 
 # print out the brightness dict
 print("\n~~~~~~ All Brightness Temperature Values ~~~~~~\n")
