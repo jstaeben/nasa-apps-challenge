@@ -30,3 +30,4 @@ What you need:
 - HDF5 files in a `h5files/` directory (located in working directory)
 - List of HDF5 file names in `data_files.txt `
   - Ideally these would be named after the Month/Day the data was collected (ex: Jan01.h5)
+  - You can get these from https://ladsweb.modaps.eosdis.nasa.gov/search/order/2/VNP46A1--5000
