@@ -64,6 +64,7 @@ def parseFile(filename, save_imgs):
         for j in i:
             totalBrightness += j
 
+    
     # calculate the actual avg brightness
     actualAvgBrightness = int(totalBrightness/5760000)
     actualAvgBrightness *= 0.0025
@@ -148,8 +149,17 @@ for key in brightness_dict.keys():
     text_values.append(key)
     
 x_values = np.arange(1, len(text_values) + 1, 1)
-
-plt.bar(x_values, y_values, align='center')
-
+fig, ax = plt.subplots(figsize=(18,10))
+plt.ylabel('Brightness Temperature (K)',size=30)
+plt.ylabel('Date',size=30)
+plt.title('Brightness Temperature Changes over time',size=50)
+fig.autofmt_xdate()
+plt.plot(x_values, y_values,"-")
 plt.xticks(x_values, text_values)
-plt.show()
+
+
+plotting_dir = "BrightTempImages/"
+if not os.path.exists(plotting_dir):
+    os.mkdir(plotting_dir)
+plt.savefig(plotting_dir + 'Temp' '.png')
+plt.close()
