@@ -19,7 +19,7 @@ Output:
     
     - If you select True for saving images and GIF:
         > Everything from the above section
-        > Images and GIF saved into the BrightTempImages directory  
+        > Images and GIF saved into the BrightTempImages/ directory  
         
 What you need:
        - HDF5 files in a h5files/ directory (located in working directory)
