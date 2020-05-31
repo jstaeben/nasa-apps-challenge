@@ -8,7 +8,7 @@ h5_parser.py is a python program that takes in HDF5 data files from the VIIRS/NP
 #### How to use h5_parser.py
 Syntax: `python3 h5_parser.py [True/False]`
  - True = Save images and GIF
- - False = Don't save images and GIF"
+ - False = Don't save images and GIF
        
 Output: 
 - If you select False for saving images and GIF:
