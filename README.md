@@ -3,7 +3,7 @@ This is the public repo for the X Æ A-12 team's project for the NASA Apps Chall
 Team members: Jamie Staeben, Kiran Devine, Sophie Lowen, Daniel Getter
 
 ### Challenge: Light the Path
-Our challenge is to use Earth observations to explore how human activity and regional land-based human movement patterns may have shifted in response to COVID-19
+Our challenge is to use Earth observations to explore how human activity and regional land-based human movement patterns may have shifted in response to COVID-19.
 
 ### Project Summary
 We used space imagery data of the Earth at night in conjunction with data about human mobility to develop a prototype model to help predict possible outbreaks. By comparing these data against trends in COVID-19 cases, we were able to identify high light pollution, high mobility, and poor social distancing practices as risk factors for spreading disease. Our model can be applied to determine where outbreaks are likely to occur, which can accelerate the process of delivering aid to these areas and enable leadership to better control the outbreak.
