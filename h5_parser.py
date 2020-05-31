@@ -18,7 +18,7 @@ Output:
     
     - If you select True for saving images and GIF:
         > Everything from False
-        > Images and GIF saved into the BrightTempImages directory 
+        > Images and GIF saved into the BrightTempImages directory  
 """
 import sys
 import os
@@ -26,6 +26,7 @@ import time
 import h5py as h5
 import matplotlib.pyplot as plt
 import imageio
+import numpy as np
 
 # open a file containing list of .h5 files
 data_files = open("data_files.txt", "r")
@@ -65,16 +66,17 @@ def parseFile(filename, save_imgs):
     # calculate the actual avg brightness
     actualAvgBrightness = int(totalBrightness/5760000)
     actualAvgBrightness *= 0.0025
-    actualAvgBrightness += 280 # MAKE SURE THIS VALUE IS RIGHT
+    actualAvgBrightness += 203 # MAKE SURE THIS VALUE IS RIGHT
 
     # pretty output
     print("\n~~~~~~ {} ~~~~~~\n".format(filename))
     print("Total Brightness Temperature: {}".format(totalBrightness))
+    print("Average Brightness Temperature: {}".format(actualAvgBrightness))
     toc = time.perf_counter()
     print("Time elapsed: {} seconds".format(int(toc - tic)))
 
-    # add brightness temperature to list
-    brightness_dict[ filename[:-3] ] =  totalBrightness
+    # add avg brightness temperature to list
+    brightness_dict[filename[:-3]] =  actualAvgBrightness
 
     # save images if user says to
     if save_imgs == "True":
@@ -99,10 +101,14 @@ def parseFile(filename, save_imgs):
 
     f1.close()
 
+# check proper command syntax
 if len(sys.argv) < 2:
     print("Syntax: python3 h5_parser.py [True/False]")
     print("=> True = Save images and GIF\n=> False = Don't save images and GIF")
     sys.exit()
+
+# start timer
+starttime = time.perf_counter()
 
 # go through each data file in our list and get its brightness temperature
 for data_file_name in data_file_list:
@@ -115,10 +121,32 @@ if sys.argv[1] == "True":
         images.append(imageio.imread(file))
     imageio.mimsave('BrightTempImages/GIF.gif', images)
 
+# end timer
+endtime = time.perf_counter()
+
 # pretty seperator
 print("\n~~~~~~ DONE, yay! ~~~~~~\n")
 
+print("Total time elapsed: {} seconds".format(int(endtime - starttime)))
+
 # print out the brightness dict
+print("\n~~~~~~ All Brightness Temperature Values ~~~~~~\n")
 for key, val in brightness_dict.items():
     print(key + ": {}".format(val))
     # this can be used to also just pull the brightness values from the dict
+
+
+y_values = []
+for val in brightness_dict.values():
+    y_values.append(val)
+    
+text_values = []
+for key in brightness_dict.keys():
+    text_values.append(key)
+    
+x_values = np.arange(1, len(text_values) + 1, 1)
+
+plt.bar(x_values, y_values, align='center')
+
+plt.xticks(x_values, text_values)
+plt.show()
