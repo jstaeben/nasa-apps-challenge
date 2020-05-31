@@ -18,7 +18,7 @@ Output:
         > Saves plot of Date vs. Brightness Temperature into the BrightTempImages directory  
     
     - If you select True for saving images and GIF:
-        > Everything from False
+        > Everything from the above section
         > Images and GIF saved into the BrightTempImages directory  
 """
 import sys
